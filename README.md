@@ -1,22 +1,22 @@
 scarHRD R package Manual
 ========================
 
--   [Introduction](#introduction)
-    -   [Contact](#contact)
--   [Getting started](#getting-started)
-    -   [Minimum requirements](#minimum-requirements)
-    -   [Installation](#installation)
--   [Citation](#citation)
--   [Workflow overview](#workflow-overview)
-    -   [Input file examples](#input-file-examples)
-    -   [Usage example](#usage-example)
-    -   [Parameters](#parameters)
--   [Genomic scar scores](#genomic-scar-scores)
-    -   [Loss of Heterozygosity (HRD-LOH)](#loss-of-heterozygosity-hrd-loh)
-    -   [Large Scale Transitions (LST)](#large-scale-transitions-lst)
-    -   [Number of Telomeric Allelic Imbalances](#number-of-telomeric-allelic-imbalances)
--   [Running on mouse genomes](#running-on-mouse-genomes)
--   [References](#references)
+- [scarHRD R package Manual](#scarhrd-r-package-manual)
+- [Introduction](#introduction)
+  - [Contact](#contact)
+- [Getting started](#getting-started)
+  - [Installation](#installation)
+  - [Running on GRCh38](#running-on-grch38)
+  - [Citation](#citation)
+- [Workflow overview](#workflow-overview)
+  - [Input file examples](#input-file-examples)
+  - [Usage example](#usage-example)
+  - [Parameters](#parameters)
+- [Genomic scar scores](#genomic-scar-scores)
+  - [Loss of Heterozygosity (HRD-LOH)](#loss-of-heterozygosity-hrd-loh)
+  - [Large Scale Transitions (LST)](#large-scale-transitions-lst)
+  - [Number of Telomeric Allelic Imbalances](#number-of-telomeric-allelic-imbalances)
+- [References](#references)
 
 Introduction
 ============
@@ -35,17 +35,9 @@ contact: <zsofia.sztupinszki@childrens.harvard.edu>
 Getting started
 ===============
 
-Minimum requirements
---------------------
-
--   Software: R
--   Operating system: Linux, OS X, Windows
--   R version: 3.5.0
--   **latest version of Sequenza R package** must be installed from **Bitbucket** https://bitbucket.org/sequenza_tools/sequenza   
-
 ``` r
 library(devtools)
-install_bitbucket('sequenza_tools/sequenza')
+devtools::install_github("buschlab/sequenza", build_vignettes = FALSE)
 ```  
 
 Installation
@@ -88,7 +80,7 @@ A typical workflow of determining the genomic scar scores for a tumor sample has
  Example for using Sequenza:  
 > sequenza-utils bam2seqz -gc /reference/GRCh38.gc50Base.txt.gz --fasta /reference/GRCh38.d1.vd1.fa -n /data/normal.bam --tumor /data/tumor.bam -C chr1 chr2 chr3 chr4 chr5 chr6 chr7 chr8 chr9 chr10 chr11 chr12 chr13 chr14 chr15 chr16 chr17 chr18 chr19 chr20 chr21 chr22 chr23 chr24 chrX | sequenza-utils seqz\_binning -w 50 -s - | gzip &gt; /results/tumor\_small.seqz.gz
 Further details can be found in the Vignette of Sequenza: <https://cran.r-project.org/web/packages/sequenza/vignettes/sequenza.pdf>  
-2. Determine the scar scores with scarHRD R package.  
+1. Determine the scar scores with scarHRD R package.  
 This step only takes a few minutes.  
 
 Input file examples
@@ -97,7 +89,7 @@ Input file examples
 The scarHRD input may be a detailed segmentation file from Sequenza, in case there is a reliable estimation of ploidy of the tumor sample is known, it should be sumbitted in the `ploidy` argument of the `scarHRD` function, otherwise ploidy between 1 and 5.5 will be tested:
 
 ``` r
-a<-read.table("/examples/test1.small.seqz.gz", header=T)
+a <- read.table("/examples/test1.small.seqz.gz", header=T)
 head(a)
 ```
 
