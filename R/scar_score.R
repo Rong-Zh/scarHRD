@@ -13,7 +13,10 @@
 scar_score <- function(seg, reference = "grch38", chr.in.names = TRUE, seqz = FALSE, ploidy = NULL, sizelimitLOH = 15e6, outputdir = NULL) {
   if (is.null(outputdir)) {
     outputdir <- dirname(seg)
+  } else if(!dir.exists(outputdir)) {
+    dir.create(outputdir)
   }
+  
   if (reference == "grch38") {
     chrominfo <- chrominfo_grch38
     if (!chr.in.names) {
