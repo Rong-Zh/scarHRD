@@ -36,7 +36,7 @@ Getting started
 ===============
 
 ``` r
-library(devtools)
+install.packages(“devtools”)
 devtools::install_github("buschlab/sequenza", build_vignettes = FALSE)
 ```  
 
