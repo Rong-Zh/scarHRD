@@ -14,7 +14,7 @@ preprocess.seqz <- function(seg, ploidy0 = NULL, chr.in.names = TRUE, outputdir 
   if (is.null(outputdir)) {
     outputdir <- dirname(seg)
   }
-  run_name <- gsub("\\.gz|\\.seqz\\.gz|\\.small\\.seqz\\.gz", "", basename(seg))
+  run_name <- gsub("[._]?small\\.seqz\\.gz|[._]?seqz\\.gz|\\.gz", "", basename(seg))
   if (chr.in.names) {
     extract <- sequenza.extract(seg, chromosome.list = paste("chr", c(1:22, "X", "Y"), sep = ""), gamma = 60, kmin = 50)
   } else {
