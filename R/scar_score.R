@@ -66,12 +66,10 @@ scar_score <- function(seg, reference = "grch38", chr.in.names = TRUE, seqz = FA
   } else {
     sum_HRDc <- res_lst - 15.5 * ploidy + res_hrd + res_ai[1]
   }
-
-  # HRDresulst<-c(res_hrd,res_ai,res_lst,sum_HRD0,sum_HRDc)
-  # names(HRDresulst)<-c("HRD",colnames(res_ai),"LST", "HRD-sum","adjusted-HRDsum")
+  
   run_name <- names(sum_HRD0)
   HRDresulst <- data.frame(run_name, res_hrd, res_ai[1], res_lst, sum_HRD0, row.names = NULL)
-  colnames(HRDresulst) <- c("Name", "HRD", colnames(res_ai)[1], "LST", "HRD Sum")
+  colnames(HRDresulst) <- c("Name", "LOH", "TAI", "LST", "HRDSumScore")
   write.table(HRDresulst, paste0(outputdir, "/", run_name, ".HRD.results.txt"), row.names = FALSE,sep = "\t", quote = FALSE)
   return(HRDresulst)
 }
